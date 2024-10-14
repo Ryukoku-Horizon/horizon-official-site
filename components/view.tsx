@@ -5,6 +5,10 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import { PiInstagramLogoLight } from "react-icons/pi";
+import { RiTwitterXLine } from "react-icons/ri";
+import { GrGithub } from "react-icons/gr";
+
 import { ReactLenis, useLenis } from 'lenis/react'
 
 import SplitType from 'split-type'
@@ -134,14 +138,14 @@ export default function View({news_list }: {news_list: NewsList}) {
     </section>
     <section id="link" className="grid grid-cols-3 p-10">
       <div className="flex flex-col items-center">
-        <a href='https://x.com/ryukokuhorizon' className="text-white opacity-75 text-xs p-2">
-          TWITTER
+        <a href='https://x.com/ryukokuhorizon' target="_blank" className="text-white opacity-75 text-xs p-2">
+        <RiTwitterXLine size={25}/>
         </a>
-        <a href='https://www.instagram.com/horizon_ryu/' className="text-white opacity-75 text-xs p-2">
-          INSTAGRAM
+        <a href='https://www.instagram.com/ryukokuhorizon/' target="_blank" className="text-white opacity-75 text-xs p-2">
+          <PiInstagramLogoLight size={25}/>
         </a>
-        <a href='https://github.com/Ryukoku-Horizon' className="text-white opacity-75 text-xs p-2">
-          GITHUB
+        <a href='https://github.com/Ryukoku-Horizon' target="_blank" className="text-white opacity-75 text-xs p-2">
+          <GrGithub size={25}/>
         </a>
       </div>
       <div className="text-center">
