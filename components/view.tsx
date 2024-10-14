@@ -9,12 +9,9 @@ import { ReactLenis, useLenis } from 'lenis/react'
 
 import SplitType from 'split-type'
 
-export default function View({cms_response}) {
-    
-    console.log(cms_response)
-    const response = ["Discover", "The", "Horizon"]
-    console.log(cms_response)
+export default function View({news_list}) {
 
+    const response = ["Discover", "The", "Horizon"]
   const lenis = useLenis(({ scroll }) => {
     // called every scroll
   })
@@ -90,7 +87,7 @@ export default function View({cms_response}) {
         NEWS
       </div>
       <ul className='grid grid-cols-5 m-5'>
-        {[...cms_response.contents].map((content) => (
+        {[...news_list.contents].map((content) => (
           <li className='bg-gray-900 h-[30vw] w-[17vw] text-center flex flex-col'>
             <div className='h-[14vw] bg-gray-200 relative'>
               <div className="absolute top-0 left-0 w-0 h-0 

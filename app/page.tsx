@@ -3,13 +3,15 @@ import View from '../components/view'
 import { client } from '../libs/client';
 
 export default async function Home() {
-  const cms_response = await client
-    .get({
+  const news_list = await client
+    .getList({
         endpoint: 'news',
+        queries: {limit: 10,}
     })
+    .catch((err) => console.error(err));
 
   //const cms_response = await fetchStaticData()
   return (
-    <View cms_response={cms_response}  />
+    <View news_list={news_list}  />
   );
 };
