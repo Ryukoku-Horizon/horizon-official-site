@@ -4,6 +4,7 @@ import { client } from '../libs/client';
 
 import { NewsList } from '../types/news';
 
+
 export default async function Home() {
   const response = await client
     .getList({
@@ -12,11 +13,14 @@ export default async function Home() {
     })
     .catch((err) => console.error(err));
 
-    const news_list: NewsList = {contents: [], totalCount: 0, offset: 0, limit: 0};
 
-  if (response !== void 0) {
-    const news_list: NewsList = response;
-  }
+    // fix me!
+    let news_list: NewsList = {contents: [], totalCount: 0, offset: 0, limit: 0};
+
+    if (response) {
+      news_list = response;
+    }
+
 
   //const cms_response = await fetchStaticData()
   return (
