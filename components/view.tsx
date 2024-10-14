@@ -9,7 +9,9 @@ import { ReactLenis, useLenis } from 'lenis/react'
 
 import SplitType from 'split-type'
 
-export default function View({news_list}) {
+import { News, NewsList } from '../types/news'
+
+export default function View({news_list }: {news_list: NewsList}) {
 
     const response = ["Discover", "The", "Horizon"]
   const lenis = useLenis(({ scroll }) => {
