@@ -88,28 +88,26 @@ export default function View({news_list }: {news_list: NewsList}) {
         私たちと一緒にプログラミングを学びませんか？
       </div>
     </section>
-    <section id="news" className="bg-white relative h-[110vh]">
+    <section id="news" className="bg-white relative">
       <div className="sticky text-black text-8xl p-5">
         NEWS
       </div>
-      <ul className='grid grid-cols-5 m-5'>
+      <ul className='p-11'>
         {[...news_list.contents].map((content) => (
-          <li className='bg-gray-900 h-[30vw] w-[17vw] text-center flex flex-col'>
-            <div className='h-[14vw] bg-gray-200 relative'>
-              <div className="absolute top-0 left-0 w-0 h-0 
-                      border-t-[20px] bg-slate-300
-                      border-r-[20px] border-r-transparent">
-              </div>
-            </div>
-            <div className="text-white opacity-70 p-5 text-left flex-grow ">
+          <li className='border-b border-gray-200 py-4 last:border-b-0 hover:scale-105 transition ease-in-out delay-150'>
+            <div className='flex flex-col sm:flex-row sm:justify-between'>
+            
+            <div className="text-lg font-semibold text-gray-800 mb-1 sm:mb-0">
               {content.title}
             </div>
-            <div className="text-white opacity-55 p-5 text-left">
-              {content.date}
+            <div className="text-sm text-gray-500">
+              {content.date.split('T')[0]}
+            </div>
             </div>
           </li>
         ))}
       </ul>
+      <div className='h-[30vh]'></div>
     </section>
     <section id="link" className="grid grid-cols-3 p-10">
       <div className="flex flex-col items-center">
