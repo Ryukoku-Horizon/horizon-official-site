@@ -111,31 +111,6 @@ export default function View({news_list }: {news_list: NewsList}) {
         ))}
       </ul>
     </section>
-    <section id="faq" className="h-96">
-      <div className="sticky text-white text-8xl p-5">
-        FAQ
-      </div>
-      <ul>
-        <li className='h-[10vh] flex'>
-          <div className='w-[50vw] flex'>
-            <div className='bg-black text-white w-[10vh] text-7xl '>
-              Q
-            </div>
-            <div className='bg-black text-white flex items-center'>
-              活動日はいつですか？
-            </div>
-          </div>
-          <div className='w-[50vw] flex'>
-            <div className='bg-white text-black w-[10vh] text-7xl'>
-              A
-            </div>
-            <div className='bg-white text-black flex items-center'>
-              深草キャンパスは毎週火曜・金曜、瀬田キャンパスは毎週火曜・木曜に活動しています。
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
     <section id="link" className="grid grid-cols-3 p-10">
       <div className="flex flex-col items-center">
         <a href='https://x.com/ryukokuhorizon' target="_blank" className="text-white opacity-75 text-xs p-2">
@@ -167,9 +142,6 @@ export default function View({news_list }: {news_list: NewsList}) {
         © 2024 Horizon
       </div>
     </div>
-    <a href="mailto:ryukokuhorizon@gmail.com" className='fixed bg-slate-50 right-0 bottom-5 text-center h-[10vh] w-[20vw] py-2 px-4 rounded text-6xl font-thin'>
-      Join us!
-    </a>
   </ReactLenis>
     );
 }
