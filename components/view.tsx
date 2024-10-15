@@ -94,7 +94,7 @@ export default function View({news_list }: {news_list: NewsList}) {
       </div>
       <ul className='p-11'>
         {[...news_list.contents].map((content) => (
-          <li className='border-b border-gray-200 py-4 last:border-b-0 hover:scale-105 transition ease-in-out delay-150'>
+          <li className='border-b border-gray-200 py-4'>
             <div className='flex flex-col sm:flex-row sm:justify-between'>
             
             <div className="text-lg font-semibold text-gray-800 mb-1 sm:mb-0">
