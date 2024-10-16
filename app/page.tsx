@@ -1,19 +1,14 @@
 "use client";
-
 import "lenis/dist/lenis.css";
-
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import NewsCards from "../components/news/NewsCards";
 import { ReactLenis, useLenis } from "lenis/react";
-
 import SplitType from "split-type";
-
 export default function Home() {
   const response = ["Discover", "The", "Horizon"];
-
   const lenis = useLenis(({ scroll }) => {
     // called every scroll
   });
@@ -145,8 +140,8 @@ export default function Home() {
         <div className="sticky text-black text-8xl p-5">NEWS</div>
         <div className="max-w-7xl mx-auto">
           <ul className="grid grid-cols-1 sm:grid-cols-2  gap-5 m-5">
-            <NewsCards />
-            <NewsCards />
+            <NewsCards content="公式サイトをリニューアルしました" />
+            <NewsCards content="公式サイトをリニューアルしました" />
           </ul>
         </div>
       </section>

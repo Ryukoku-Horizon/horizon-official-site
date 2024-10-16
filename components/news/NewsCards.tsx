@@ -1,4 +1,4 @@
-export default function NewsCards() {
+export default function NewsCards({ content }: { content: string }) {
   return (
     <li className="bg-gray-900 h-80 w-full sm:w-64 md:w-80 lg:w-96 text-center flex flex-col">
       <div className="relative">
@@ -9,7 +9,7 @@ export default function NewsCards() {
         ></div>
       </div>
       <div className="text-white opacity-70 p-5 text-left flex-grow">
-        公式サイトをリニューアルしました。
+        {content}
       </div>
       <div className="text-white opacity-55 p-5 text-left">2024/09/28</div>
     </li>
