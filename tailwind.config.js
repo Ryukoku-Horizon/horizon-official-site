@@ -10,6 +10,11 @@ module.exports = {
       fontSize: {
         '3vh': '30vh',
       },
+      fontFamily: {
+        'teko':  ["var(--font-teko)"],
+        'rubik': ["var(--font-rubik)"],
+        'kanit': ["var(--font-kanit)"],
+      },
     },
   },
   plugins: [],

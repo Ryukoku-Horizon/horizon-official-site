@@ -5,9 +5,6 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { PiInstagramLogoLight } from "react-icons/pi";
-import { RiTwitterXLine } from "react-icons/ri";
-import { GrGithub } from "react-icons/gr";
 
 import { ReactLenis, useLenis } from 'lenis/react'
 
@@ -88,58 +85,57 @@ export default function View({news_list }: {news_list: NewsList}) {
         私たちと一緒にプログラミングを学びませんか？
       </div>
     </section>
-    <section id="news" className="bg-white relative">
-      <div className="sticky text-black text-8xl p-5">
-        NEWS
+    <section id="main" className="bg-white relative p-8 h-[100vh] flex flex-col">
+      <div className='flex flex-row'>
+      <div className='font-rubik text-4xl'>
+        <div className='pb-10'>
+          NEWS
+        </div>
+        <div className='pb-10'>
+          PRODUCT
+        </div>
+        <div>
+          EVENT
+        </div>
       </div>
-      <ul className='p-11'>
+      <div className='grow-0 pl-10'>
+      <div className='font-kanit text-lg flex-row flex ml-10'>
+        <div className='px-5 border-2 border-gray-700 rounded-2xl m-1'>
+          #Event
+        </div>
+        <div className='px-5 border-2 border-gray-700 rounded-2xl m-1'>
+          #Tech
+        </div>
+      </div>
+      <ul className='flex flex-row'>
         {[...news_list.contents].map((content) => (
-          <li className='border-b border-gray-200 py-4'>
-            <div className='flex flex-col sm:flex-row sm:justify-between'>
-            
-            <div className="text-lg font-semibold text-gray-800 mb-1 sm:mb-0">
-              {content.title}
-            </div>
-            <div className="text-sm text-gray-500">
-              {content.date.split('T')[0]}
-            </div>
-            </div>
+          <li className='w-[15vw] h-[20vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col'>
+              <div className="text-lg font-semibold text-gray-800">
+                {content.title}
+              </div>
+              <div className="text-sm text-gray-500 mt-auto">
+                {content.date.split('T')[0]}
+              </div>
           </li>
         ))}
       </ul>
-      <div className='h-[30vh]'></div>
-    </section>
-    <section id="link" className="grid grid-cols-3 p-10">
-      <div className="flex flex-col items-center">
-        <a href='https://x.com/ryukokuhorizon' target="_blank" className="text-white opacity-75 text-xs p-2">
-        <RiTwitterXLine size={25}/>
-        </a>
-        <a href='https://www.instagram.com/ryukokuhorizon/' target="_blank" className="text-white opacity-75 text-xs p-2">
-          <PiInstagramLogoLight size={25}/>
-        </a>
-        <a href='https://github.com/Ryukoku-Horizon' target="_blank" className="text-white opacity-75 text-xs p-2">
-          <GrGithub size={25}/>
-        </a>
       </div>
-      <div className="text-center">
-        <div className="text-white opacity-75 p-5 text-xs">
-          龍谷大学学友会学術文化局プログラミング部Horizon
-        </div>
       </div>
-      <div className="text-center">
-        <div className="text-white opacity-75 text-xs">
-          〒612-8577 京都市伏見区深草塚本町67
-        </div>
-        <div className="text-white opacity-75 text-xs">
-          〒520-2123 滋賀県大津市瀬田大江町横谷１−５
+      <div className="text-3xl font-teko opacity-75 mt-auto flex ">
+        <a href='https://x.com/ryukokuhorizon' target="_blank" className='m-3'>
+          TWITTER
+        </a>
+        <a href='https://www.instagram.com/ryukokuhorizon/' target="_blank" className='m-3'>
+          INSTAGRAM
+        </a>
+        <a href='https://github.com/Ryukoku-Horizon' target="_blank" className='m-3'>
+          GITHUB
+        </a>
+        <div className='m-3 ml-auto'>
+          © Horizon
         </div>
       </div>
     </section>
-    <div className="text-center">
-      <div className="text-white p-10 opacity-40">
-        © 2024 Horizon
-      </div>
-    </div>
   </ReactLenis>
     );
 }
