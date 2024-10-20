@@ -10,9 +10,17 @@ import { ReactLenis, useLenis } from 'lenis/react'
 
 import SplitType from 'split-type'
 
-import { News, NewsList } from '../types/news'
+import { filteringList } from '../features/filteringList'
 
-export default function View({news_list }: {news_list: NewsList}) {
+import { rawNewsList, rawNewsCategoryList, News, NewsCategory} from '../types/news'
+
+export default function View({
+  news_list,
+  news_category
+}: {
+  news_list: rawNewsList;
+  news_category: rawNewsCategoryList;
+}) {
 
     const response = ["Discover", "The", "Horizon"]
   const lenis = useLenis(({ scroll }) => {
@@ -56,6 +64,47 @@ export default function View({news_list }: {news_list: NewsList}) {
     setScrolled(scroll / (scrollHeight - clientHeight));
 
   });
+
+  const [NewsCategories, setNewsCategories] = useState<NewsCategory[]>(
+    news_category.contents.map((category) => ({
+      id: category.id,
+      title: category.category,
+      selected: false,
+    }))
+  );
+
+  const [filteringCategory, setFilteringCategory] = useState<string[]>([]);
+
+  const [newsList, setNewsList] = useState<News[]>(
+    news_list.contents.map((news) => ({
+      id: news.id,
+      title: news.title,
+      date: news.date,
+      categories: news.category?.map((category) => category.category) || []
+    }))
+  );
+
+  const filterdNews = filteringList({news: newsList, category: filteringCategory})
+
+  const handleCategoryClick = (categoryId: string, categoryTitle: string) => {
+    setFilteringCategory(prevItems => {
+      // すでにアイテムが存在する場合は削除
+      if (prevItems.includes(categoryTitle)) {
+        return prevItems.filter(item => item !== categoryTitle);
+      }
+      // 存在しない場合は追加
+      return [...prevItems, categoryTitle];
+    });
+
+    setNewsCategories(categories =>
+      categories.map(category =>
+        category.id === categoryId
+          ? { ...category, selected: !category.selected }
+          : category
+      )
+    );
+  };
+
     return (
 
     <ReactLenis root>
@@ -100,16 +149,20 @@ export default function View({news_list }: {news_list: NewsList}) {
       </div>
       <div className='grow-0 pl-10'>
       <div className='font-kanit text-lg flex-row flex ml-10'>
-        <div className='px-5 border-2 border-gray-700 rounded-2xl m-1'>
-          #Event
-        </div>
-        <div className='px-5 border-2 border-gray-700 rounded-2xl m-1'>
-          #Tech
-        </div>
+        {[...NewsCategories].map((category) => (
+        <button
+        key={category.id}
+        onClick={()=>handleCategoryClick(category.id, category.title)}
+        className={`px-5 rounded-2xl m-1 border-2 border-gray-700 ${category.selected ? 'text-white bg-gray-700' : ''}`}
+        >
+          {"#"+ category.title}
+        </button>
+        ))}
       </div>
+
       <ul className='flex flex-row'>
-        {[...news_list.contents].map((content) => (
-          <li className='w-[15vw] h-[20vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col'>
+        {[...filterdNews].map((content) => (
+          <li className='w-[15vw] h-[17vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col'>
               <div className="text-lg font-semibold text-gray-800">
                 {content.title}
               </div>
@@ -119,6 +172,14 @@ export default function View({news_list }: {news_list: NewsList}) {
           </li>
         ))}
       </ul>
+      <div className='flex flex-row h-[45vh]'>
+        <div className='bg-gray-300 m-5 w-[30vw]'>
+
+        </div>
+        <div className='bg-gray-700 m-5 w-[30vw]'>
+
+        </div>
+      </div>
       </div>
       </div>
       <div className="text-3xl font-teko opacity-75 mt-auto flex ">
