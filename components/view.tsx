@@ -52,6 +52,7 @@ export default function View({
       main_tl.from('.baz', { duration: 1, autoAlpha: 0, y: 100, scale: 0.3, scrollTrigger: { trigger: '.baz', start: 'top 70%', end: '10% center', scrub: true, } })
     },
   );
+
   const [scrolled, setScrolled] = useState<number>(0);
 
   useLenis(({ scroll }) => {
@@ -80,7 +81,9 @@ export default function View({
       id: news.id,
       title: news.title,
       date: news.date,
-      categories: news.category?.map((category) => category.category) || []
+      categories: news.category?.map((category) => category.category) || [],
+      main_content: news.main_content,
+      main_image: news.main_image,
     }))
   );
 
@@ -104,6 +107,20 @@ export default function View({
       )
     );
   };
+
+  const [selectedNews, setSelectedNews] = useState<News | null>(null);
+
+  const handleNewsClick = (newsId: string) => {
+    const selectedNews = newsList.find(news => news.id === newsId);
+    if (!selectedNews) return;
+    setSelectedNews(selectedNews);
+  }
+
+  console.log(selectedNews)
+  console.log( news_list)
+
+
+  //useGSAP(() => {gsap.to('.hoge',{})},[filterdNews])
 
     return (
 
@@ -162,23 +179,38 @@ export default function View({
 
       <ul className='flex flex-row'>
         {[...filterdNews].map((content) => (
-          <li className='w-[15vw] h-[17vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col'>
+          <li  key={content.id}>
+            <button className='w-[15vw] h-[17vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col' onClick={() =>  handleNewsClick(content.id)}>
               <div className="text-lg font-semibold text-gray-800">
                 {content.title}
               </div>
               <div className="text-sm text-gray-500 mt-auto">
                 {content.date.split('T')[0]}
               </div>
+              </button>
           </li>
         ))}
       </ul>
       <div className='flex flex-row h-[45vh]'>
-        <div className='bg-gray-300 m-5 w-[30vw]'>
-
+        <div className='relative bg-gray-100 m-5 w-[30vw] text-xl p-5 font-murecho'>
+          {selectedNews?.main_content}
+          <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
+          <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
+          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-gray-700"></div>
         </div>
-        <div className='bg-gray-700 m-5 w-[30vw]'>
-
-        </div>
+          <div className='relative bg-gray-100 m-5 w-[30vw] text-xl font-murecho'>
+            {selectedNews?.main_image?.url && 
+            <img 
+            src={selectedNews?.main_image.url}
+            alt={selectedNews?.title} 
+            className='w-full h-full object-cover'
+            />}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-gray-700"></div>
+          </div>
       </div>
       </div>
       </div>

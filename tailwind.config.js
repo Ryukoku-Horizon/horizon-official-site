@@ -14,6 +14,7 @@ module.exports = {
         'teko':  ["var(--font-teko)"],
         'rubik': ["var(--font-rubik)"],
         'kanit': ["var(--font-kanit)"],
+        'murecho': ["var(--font-murecho)"],
       },
     },
   },

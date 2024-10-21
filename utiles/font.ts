@@ -1,4 +1,4 @@
-import { Teko, Rubik_Mono_One, Kanit} from "next/font/google";
+import { Teko, Rubik_Mono_One, Kanit, Murecho} from "next/font/google";
 
 export const teko = Teko({
     subsets: ["latin"],
@@ -17,5 +17,12 @@ export const kanit = Kanit({
     weight: ["400"],
     subsets: ["latin"],
     variable: "--font-kanit",
+    display: "swap",
+});
+
+export const murecho = Murecho({
+    weight: ["500"],
+    subsets: ["latin"],
+    variable: "--font-murecho",
     display: "swap",
 });

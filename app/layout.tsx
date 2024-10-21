@@ -2,7 +2,7 @@
 
 import "../styles/global.css";
 
-import { teko, rubik_mono_one, kanit} from '../utiles/font'
+import { teko, rubik_mono_one, kanit, murecho} from '../utiles/font'
 
 export default function RootLayout({
   children,
@@ -10,7 +10,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-      <html lang="en" className={`${teko.variable} ${rubik_mono_one.variable} ${kanit.variable}`}>
+      <html lang="en" className={`${teko.variable} ${rubik_mono_one.variable} ${kanit.variable} ${murecho.variable}`}>
         <body className="bg-black">
           {children}
         </body>

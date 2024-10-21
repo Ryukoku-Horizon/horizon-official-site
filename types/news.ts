@@ -5,8 +5,9 @@ export interface rawNews {
         publishedAt: string;
         revisedAt: string;
         title: string;
-        date: string;
         main_content?: string;
+        main_image?: image;
+        date: string;
         category: rawNewsCategory[];
       }
 
@@ -38,8 +39,16 @@ export interface News {
     id: string;
     title: string;
     date: string;
+    main_content?: string;
+    main_image?: image;
     categories: string[];
   }
+
+export interface image {
+    url: string;
+    height: number;
+    width: number;
+}
 
 export interface NewsCategory {
     id: string;
