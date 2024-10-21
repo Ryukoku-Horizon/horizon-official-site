@@ -5,17 +5,22 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { PiInstagramLogoLight } from "react-icons/pi";
-import { RiTwitterXLine } from "react-icons/ri";
-import { GrGithub } from "react-icons/gr";
 
 import { ReactLenis, useLenis } from 'lenis/react'
 
 import SplitType from 'split-type'
 
-import { News, NewsList } from '../types/news'
+import { filteringList } from '../features/filteringList'
 
-export default function View({news_list }: {news_list: NewsList}) {
+import { rawNewsList, rawNewsCategoryList, News, NewsCategory} from '../types/news'
+
+export default function View({
+  news_list,
+  news_category
+}: {
+  news_list: rawNewsList;
+  news_category: rawNewsCategoryList;
+}) {
 
     const response = ["Discover", "The", "Horizon"]
   const lenis = useLenis(({ scroll }) => {
@@ -47,6 +52,7 @@ export default function View({news_list }: {news_list: NewsList}) {
       main_tl.from('.baz', { duration: 1, autoAlpha: 0, y: 100, scale: 0.3, scrollTrigger: { trigger: '.baz', start: 'top 70%', end: '10% center', scrub: true, } })
     },
   );
+
   const [scrolled, setScrolled] = useState<number>(0);
 
   useLenis(({ scroll }) => {
@@ -59,6 +65,63 @@ export default function View({news_list }: {news_list: NewsList}) {
     setScrolled(scroll / (scrollHeight - clientHeight));
 
   });
+
+  const [NewsCategories, setNewsCategories] = useState<NewsCategory[]>(
+    news_category.contents.map((category) => ({
+      id: category.id,
+      title: category.category,
+      selected: false,
+    }))
+  );
+
+  const [filteringCategory, setFilteringCategory] = useState<string[]>([]);
+
+  const [newsList, setNewsList] = useState<News[]>(
+    news_list.contents.map((news) => ({
+      id: news.id,
+      title: news.title,
+      date: news.date,
+      categories: news.category?.map((category) => category.category) || [],
+      main_content: news.main_content,
+      main_image: news.main_image,
+    }))
+  );
+
+  const filterdNews = filteringList({news: newsList, category: filteringCategory})
+
+  const handleCategoryClick = (categoryId: string, categoryTitle: string) => {
+    setFilteringCategory(prevItems => {
+      // すでにアイテムが存在する場合は削除
+      if (prevItems.includes(categoryTitle)) {
+        return prevItems.filter(item => item !== categoryTitle);
+      }
+      // 存在しない場合は追加
+      return [...prevItems, categoryTitle];
+    });
+
+    setNewsCategories(categories =>
+      categories.map(category =>
+        category.id === categoryId
+          ? { ...category, selected: !category.selected }
+          : category
+      )
+    );
+  };
+
+  const [selectedNews, setSelectedNews] = useState<News | null>(null);
+
+  const handleNewsClick = (newsId: string) => {
+    const selectedNews = newsList.find(news => news.id === newsId);
+    if (!selectedNews) return;
+    setSelectedNews(selectedNews);
+  }
+
+  console.log(selectedNews)
+  console.log( news_list)
+
+
+  //useGSAP(() => {gsap.to('.hoge',{})},[filterdNews])
+
     return (
 
     <ReactLenis root>
@@ -88,58 +151,89 @@ export default function View({news_list }: {news_list: NewsList}) {
         私たちと一緒にプログラミングを学びませんか？
       </div>
     </section>
-    <section id="news" className="bg-white relative">
-      <div className="sticky text-black text-8xl p-5">
-        NEWS
+    <section id="main" className="bg-white relative p-8 h-[100vh] flex flex-col">
+      <div className='flex flex-row'>
+      <div className='font-rubik text-4xl'>
+        <div className='pb-10'>
+          NEWS
+        </div>
+        <div className='pb-10'>
+          PRODUCT
+        </div>
+        <div>
+          EVENT
+        </div>
       </div>
-      <ul className='p-11'>
-        {[...news_list.contents].map((content) => (
-          <li className='border-b border-gray-200 py-4'>
-            <div className='flex flex-col sm:flex-row sm:justify-between'>
-            
-            <div className="text-lg font-semibold text-gray-800 mb-1 sm:mb-0">
-              {content.title}
-            </div>
-            <div className="text-sm text-gray-500">
-              {content.date.split('T')[0]}
-            </div>
-            </div>
+      <div className='grow-0 pl-10'>
+      <div className='font-kanit text-lg flex-row flex ml-10'>
+        {[...NewsCategories].map((category) => (
+        <button
+        key={category.id}
+        onClick={()=>handleCategoryClick(category.id, category.title)}
+        className={`px-5 rounded-2xl m-1 border-2 border-gray-700 ${category.selected ? 'text-white bg-gray-700' : ''}`}
+        >
+          {"#"+ category.title}
+        </button>
+        ))}
+      </div>
+
+      <ul className='flex flex-row'>
+        {[...filterdNews].map((content) => (
+          <li  key={content.id} className='hover:scale-105 transition ease-in-out delay-150'>
+            <button className='w-[15vw] h-[17vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col' onClick={() =>  handleNewsClick(content.id)}>
+              <div className="text-lg font-semibold text-gray-800">
+                {content.title}
+              </div>
+              <div className="text-sm text-gray-500 mt-auto">
+                {content.date.split('T')[0]}
+              </div>
+              </button>
           </li>
         ))}
       </ul>
-      <div className='h-[30vh]'></div>
+      <div className='flex flex-row h-[45vh]'>
+        <div className='relative bg-gray-100 m-5 w-[30vw] text-xl p-5 font-murecho flex items-center justify-center'>
+          {selectedNews?.main_content ? 
+          <div>{selectedNews?.main_content}</div>
+          :
+          <div className='text-gray-400 font-kanit'>CONTENT</div>}
+          <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
+          <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
+          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
+          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-gray-700"></div>
+        </div>
+          <div className='relative bg-gray-100 m-5 w-[30vw] text-xl font-murecho flex items-center justify-center'>
+            {selectedNews?.main_image?.url ?
+            <img 
+            src={selectedNews?.main_image.url}
+            alt={selectedNews?.title} 
+            className='w-full h-full object-cover'
+            />
+            :
+            <div className='text-gray-400  font-kanit'>IMAGE</div>}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-gray-700"></div>
+          </div>
+      </div>
+      </div>
+      </div>
+      <div className="text-3xl font-teko opacity-75 mt-auto flex ">
+        <a href='https://x.com/ryukokuhorizon' target="_blank" className='m-3'>
+          TWITTER
+        </a>
+        <a href='https://www.instagram.com/ryukokuhorizon/' target="_blank" className='m-3'>
+          INSTAGRAM
+        </a>
+        <a href='https://github.com/Ryukoku-Horizon' target="_blank" className='m-3'>
+          GITHUB
+        </a>
+        <div className='m-3 ml-auto'>
+          © Horizon
+        </div>
+      </div>
     </section>
-    <section id="link" className="grid grid-cols-3 p-10">
-      <div className="flex flex-col items-center">
-        <a href='https://x.com/ryukokuhorizon' target="_blank" className="text-white opacity-75 text-xs p-2">
-        <RiTwitterXLine size={25}/>
-        </a>
-        <a href='https://www.instagram.com/ryukokuhorizon/' target="_blank" className="text-white opacity-75 text-xs p-2">
-          <PiInstagramLogoLight size={25}/>
-        </a>
-        <a href='https://github.com/Ryukoku-Horizon' target="_blank" className="text-white opacity-75 text-xs p-2">
-          <GrGithub size={25}/>
-        </a>
-      </div>
-      <div className="text-center">
-        <div className="text-white opacity-75 p-5 text-xs">
-          龍谷大学学友会学術文化局プログラミング部Horizon
-        </div>
-      </div>
-      <div className="text-center">
-        <div className="text-white opacity-75 text-xs">
-          〒612-8577 京都市伏見区深草塚本町67
-        </div>
-        <div className="text-white opacity-75 text-xs">
-          〒520-2123 滋賀県大津市瀬田大江町横谷１−５
-        </div>
-      </div>
-    </section>
-    <div className="text-center">
-      <div className="text-white p-10 opacity-40">
-        © 2024 Horizon
-      </div>
-    </div>
   </ReactLenis>
     );
 }
