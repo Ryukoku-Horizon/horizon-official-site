@@ -179,7 +179,7 @@ export default function View({
 
       <ul className='flex flex-row'>
         {[...filterdNews].map((content) => (
-          <li  key={content.id}>
+          <li  key={content.id} className='hover:scale-105 transition ease-in-out delay-150'>
             <button className='w-[15vw] h-[17vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col' onClick={() =>  handleNewsClick(content.id)}>
               <div className="text-lg font-semibold text-gray-800">
                 {content.title}
@@ -192,20 +192,25 @@ export default function View({
         ))}
       </ul>
       <div className='flex flex-row h-[45vh]'>
-        <div className='relative bg-gray-100 m-5 w-[30vw] text-xl p-5 font-murecho'>
-          {selectedNews?.main_content}
+        <div className='relative bg-gray-100 m-5 w-[30vw] text-xl p-5 font-murecho flex items-center justify-center'>
+          {selectedNews?.main_content ? 
+          <div>{selectedNews?.main_content}</div>
+          :
+          <div className='text-gray-400 font-kanit'>CONTENT</div>}
           <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
           <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
           <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
           <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-gray-700"></div>
         </div>
-          <div className='relative bg-gray-100 m-5 w-[30vw] text-xl font-murecho'>
-            {selectedNews?.main_image?.url && 
+          <div className='relative bg-gray-100 m-5 w-[30vw] text-xl font-murecho flex items-center justify-center'>
+            {selectedNews?.main_image?.url ?
             <img 
             src={selectedNews?.main_image.url}
             alt={selectedNews?.title} 
             className='w-full h-full object-cover'
-            />}
+            />
+            :
+            <div className='text-gray-400  font-kanit'>IMAGE</div>}
             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
             <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
             <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
