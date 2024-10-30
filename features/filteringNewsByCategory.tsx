@@ -1,6 +1,6 @@
 import { News } from '../types/news';
 
-export function filteringList( {news, category}: {news: News[], category: string[]} ) {
+export function filteringNewsByCategory( {news, category}: {news: News[], category: string[]} ) {
     if (category.length === 0) {
         return news;
       }

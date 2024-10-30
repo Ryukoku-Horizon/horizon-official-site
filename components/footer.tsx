@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { rawNewsList, rawNewsCategoryList, News, NewsCategory } from '../types/news'
 
-import { filteringList } from '../features/filteringList'
+import { filteringNewsByCategory } from '../features/filteringNewsByCategory'
 
 export default function Footer({ news_list, news_category }: {
     news_list: rawNewsList;
@@ -31,7 +31,7 @@ export default function Footer({ news_list, news_category }: {
         }))
     );
 
-    const filterdNews = filteringList({ news: newsList, category: filteringCategory })
+    const filterdNews = filteringNewsByCategory({ news: newsList, category: filteringCategory })
 
     const handleCategoryClick = (categoryId: string, categoryTitle: string) => {
         setFilteringCategory(prevItems => {
