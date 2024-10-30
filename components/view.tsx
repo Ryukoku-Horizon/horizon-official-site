@@ -31,8 +31,6 @@ export default function View({
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // const title = useRef();
-
   useGSAP(
     () => {
       // gsap code here...
@@ -116,14 +114,7 @@ export default function View({
     setSelectedNews(selectedNews);
   }
 
-  console.log(selectedNews)
-  console.log( news_list)
-
-
-  //useGSAP(() => {gsap.to('.hoge',{})},[filterdNews])
-
     return (
-
     <ReactLenis root>
     <div
       className='w-1 block bg-gray-400 fixed origin-[0%] top-0 left-0'
