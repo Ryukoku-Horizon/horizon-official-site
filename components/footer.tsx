@@ -61,36 +61,36 @@ export default function Footer({ news_list, news_category }: {
     }
 
     return (
-        <section id="main" className="bg-white relative p-8 h-[100vh] flex flex-col">
-            <div className='flex flex-row'>
-                <div className='font-rubik text-4xl'>
-                    <div className='pb-10'>
+        <section id="main" className="bg-white relative md:p-8 p-5 h-[100vh] flex flex-col">
+            <div className='md:flex md:flex-row'>
+                <div className='font-rubik md:text-4xl flex md:flex-col flex-row'>
+                    <div className='pb-10 mx-5'>
                         NEWS
                     </div>
-                    <div className='pb-10'>
+                    <div className='pb-10 mx-5'>
                         PRODUCT
                     </div>
-                    <div>
+                    <div className='mx-5'>
                         EVENT
                     </div>
                 </div>
-                <div className='grow-0 pl-10'>
-                    <div className='font-kanit text-lg flex-row flex ml-10'>
+                <div className='grow-0 md:pl-10'>
+                    <div className='font-kanit md:text-lg text-sm flex-row flex md:ml-10 mb-3'>
                         {[...NewsCategories].map((category) => (
                             <button
                                 key={category.id}
                                 onClick={() => handleCategoryClick(category.id, category.title)}
-                                className={`px-5 rounded-2xl m-1 border-2 border-gray-700 ${category.selected ? 'text-white bg-gray-700' : ''}`}
+                                className={`md:px-5 px-3 rounded-2xl m-1 border-2 border-gray-700 ${category.selected ? 'text-white bg-gray-700' : ''}`}
                             >
                                 {"#" + category.title}
                             </button>
                         ))}
                     </div>
 
-                    <ul className='flex flex-row'>
+                    <ul className='flex flex-row overflow-x-auto overflow-y-hidden'>
                         {[...filterdNews].map((content) => (
                             <li key={content.id} className='hover:scale-105 transition ease-in-out delay-150'>
-                                <button className='w-[15vw] h-[17vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col' onClick={() => handleNewsClick(content.id)}>
+                                <button className='md:w-[15vw] md:h-[17vw] h-[25vh] w-[45vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col' onClick={() => handleNewsClick(content.id)}>
                                     <div className="text-lg font-semibold text-gray-800">
                                         {content.title}
                                     </div>
@@ -101,18 +101,20 @@ export default function Footer({ news_list, news_category }: {
                             </li>
                         ))}
                     </ul>
-                    <div className='flex flex-row h-[45vh]'>
-                        <div className='relative bg-gray-100 m-5 w-[30vw] text-xl p-5 font-murecho flex items-center justify-center'>
-                            {selectedNews?.main_content ?
-                                <div>{selectedNews?.main_content}</div>
-                                :
-                                <div className='text-gray-400 font-kanit'>CONTENT</div>}
+                    <div className='md:flex md:flex-row md:h-[45vh] '>
+                        <div className='relative max-md:h-[15vh] bg-gray-100 m-5  md:w-[30vw] text-xl md:p-5 font-murecho overflow-hidden'>
+                            <div className='w-full h-full overflow-y-auto'>
+                                {selectedNews?.main_content ?
+                                    <div className='max-md:text-sm p-2'>{selectedNews?.main_content}</div>
+                                    :
+                                    <div className='text-gray-400 font-kanit text-center py-9'>CONTENT</div>}
+                            </div>
                             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
                             <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
                             <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
                             <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-gray-700"></div>
                         </div>
-                        <div className='relative bg-gray-100 m-5 w-[30vw] text-xl font-murecho flex items-center justify-center'>
+                        <div className='relative max-md:h-[15vh] bg-gray-100 m-5 md:w-[30vw] text-xl font-murecho'>
                             {selectedNews?.main_image?.url ?
                                 <img
                                     src={selectedNews?.main_image.url}
@@ -120,7 +122,7 @@ export default function Footer({ news_list, news_category }: {
                                     className='w-full h-full object-cover'
                                 />
                                 :
-                                <div className='text-gray-400  font-kanit'>IMAGE</div>}
+                                <div className='text-gray-400  font-kanit text-center py-12'>IMAGE</div>}
                             <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-gray-700"></div>
                             <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gray-700"></div>
                             <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-gray-700"></div>
@@ -129,7 +131,7 @@ export default function Footer({ news_list, news_category }: {
                     </div>
                 </div>
             </div>
-            <div className="text-3xl font-teko opacity-75 mt-auto flex ">
+            <div className="md:text-3xl text-xl font-teko opacity-75 mt-auto flex ">
                 <a href='https://x.com/ryukokuhorizon' target="_blank" className='m-3'>
                     TWITTER
                 </a>

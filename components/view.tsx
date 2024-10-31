@@ -69,7 +69,7 @@ export default function View({
           height: `calc(100%*${scrolled})`
         }}
       />
-      <div className="hoge text-white text-[33.3svh] font-bold leading-none" >
+      <div className="hoge m-5 text-white text-[20vw] lg:text-[30svh] font-bold leading-none" >
         <div className="title1 transform -translate-x-[150vh]">{response[0]}</div>
         <div className="title2 translate-y-900 opacity-100">{response[1]}</div>
         <div className="title3 ">{response[2]}</div>
