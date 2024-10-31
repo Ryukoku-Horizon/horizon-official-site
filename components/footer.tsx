@@ -87,7 +87,7 @@ export default function Footer({ news_list, news_category }: {
                         ))}
                     </div>
 
-                    <ul className='flex flex-row'>
+                    <ul className='flex flex-row overflow-x-scroll'>
                         {[...filterdNews].map((content) => (
                             <li key={content.id} className='hover:scale-105 transition ease-in-out delay-150'>
                                 <button className='w-[15vw] h-[17vw] border-2 border-gray-700 m-3 rounded-lg p-5 flex flex-col' onClick={() => handleNewsClick(content.id)}>
@@ -129,7 +129,7 @@ export default function Footer({ news_list, news_category }: {
                     </div>
                 </div>
             </div>
-            <div className="text-3xl font-teko opacity-75 mt-auto flex ">
+            <div className="md:text-3xl text-xl font-teko opacity-75 mt-auto flex ">
                 <a href='https://x.com/ryukokuhorizon' target="_blank" className='m-3'>
                     TWITTER
                 </a>
