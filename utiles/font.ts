@@ -1,4 +1,4 @@
-import { Teko, Rubik_Mono_One, Kanit, Murecho, Oxanium} from "next/font/google";
+import { Teko, Rubik_Mono_One, Kanit, Murecho, Oxanium, Copse} from "next/font/google";
 
 export const teko = Teko({
     subsets: ["latin"],
@@ -31,5 +31,12 @@ export const oxanium = Oxanium({
     weight: ["400", "700"],
     subsets: ["latin"],
     variable: "--font-oxanium",
+    display: "swap",
+});
+
+export const copse= Copse({
+    weight: ["400"],
+    subsets: ["latin"],
+    variable: "--font-copse",
     display: "swap",
 });
