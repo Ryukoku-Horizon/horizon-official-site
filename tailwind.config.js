@@ -16,6 +16,7 @@ module.exports = {
         'kanit': ["var(--font-kanit)"],
         'murecho': ["var(--font-murecho)"],
         'oxanium': ["var(--font-oxanium)"],
+        'copse': ["var(--font-copse)"],
       },
     },
   },
