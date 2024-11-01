@@ -9,8 +9,8 @@ export default function About() {
             </div>
             <div className='h-[30vh]'></div>
             <div className='h-screen w-screen'>
-                <div className='pl-[30vw] pr-[20vw] flex flex-row'>
-                    <div className='font-oxanium sticky top-1/2 -translate-y-1/2 h-fit text-5xl border-r-2'>
+                <div className='md:pl-[30vw] md:pr-[20vw] flex flex-row'>
+                    <div className='font-oxanium sticky top-1/2 -translate-y-1/2 h-fit md:text-5xl text-3xl border-r-2'>
                         what is horizon?
                     </div>
                     <div className='font-murecho text-lg'>
@@ -28,7 +28,7 @@ export default function About() {
             </div>
             <div className='h-[30vh]'></div>
             <div className='h-screen w-screen'>
-                <div className='pl-[30vw] pr-[20vw] flex flex-row'>
+                <div className='md:pl-[30vw] md:pr-[20vw] flex flex-row'>
                 <div className='font-murecho text-lg'>
                         <div className='h-[25vh] m-6'>
                             初心者を対象とした基礎班はカリキュラムベースの学習
@@ -43,7 +43,7 @@ export default function About() {
                             深草キャンパスは毎週火曜日・金曜日、瀬田キャンパスは毎週水曜日・金曜日に活動しています
                         </div>
                     </div>
-                    <div className='font-oxanium sticky top-1/2 -translate-y-1/2 h-fit text-5xl border-l-2 pl-9'>
+                    <div className='font-oxanium sticky top-1/2 -translate-y-1/2 h-fit md:text-5xl text-3xl border-l-2 pl-9'>
                         Horizon Activity details
                     </div>
                     
