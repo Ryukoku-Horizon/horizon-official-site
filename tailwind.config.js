@@ -15,6 +15,7 @@ module.exports = {
         'rubik': ["var(--font-rubik)"],
         'kanit': ["var(--font-kanit)"],
         'murecho': ["var(--font-murecho)"],
+        'oxanium': ["var(--font-oxanium)"],
       },
     },
   },
