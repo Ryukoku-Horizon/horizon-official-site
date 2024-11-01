@@ -8,6 +8,7 @@ import { ReactLenis, useLenis } from 'lenis/react'
 import SplitType from 'split-type'
 
 import Footer from './footer'
+import About from './about'
 
 import { rawNewsList, rawNewsCategoryList } from '../types/news'
 
@@ -75,20 +76,7 @@ export default function View({
         <div className="title3 ">{response[2]}</div>
       </div>
       <div className='h-[60vh]'></div>
-      <section id="about" className="h-[100vh] relative">
-        <div className="sticky text-white text-8xl p-5">
-          ABOUT
-        </div>
-        <div className="foo text-center text-white text-5xl">
-          What is Horizon?
-        </div>
-        <div className="bar text-white text-center text-4xl mt-[15vh]">
-          Horizonは創設さればかりのプログラミングサークルです。
-        </div>
-        <div className="baz text-white text-center text-4xl mt-[15vh]">
-          私たちと一緒にプログラミングを学びませんか？
-        </div>
-      </section>
+      <About/>
       <Footer news_list={news_list} news_category={news_category}/>
     </ReactLenis>
   );
