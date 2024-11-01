@@ -11,6 +11,10 @@ export default function RootLayout({
 }) {
   return (
       <html lang="en" className={`${teko.variable} ${rubik_mono_one.variable} ${kanit.variable} ${murecho.variable} ${oxanium.variable} ${copse.variable}`}>
+        <head>
+          <meta charSet="utf-8" />
+          <title>龍谷大学プログラミングサークルHorizon</title>
+        </head>
         <body className="bg-black">
           {children}
         </body>
