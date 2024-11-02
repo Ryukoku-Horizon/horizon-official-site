@@ -11,7 +11,7 @@ export default function About() {
             <div className='h-screen w-screen'>
                 <div className='md:pl-[30vw] md:pr-[20vw] flex flex-row'>
                     <div className='font-oxanium sticky top-1/2 -translate-y-1/2 h-fit md:text-5xl text-3xl border-r-2'>
-                        what is horizon?
+                        what is Horizon?
                     </div>
                     <div className='font-murecho text-lg'>
                         <div className='h-[25vh] m-6'>
