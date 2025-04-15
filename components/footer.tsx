@@ -145,6 +145,22 @@ export default function Footer({ news_list, news_category }: {
                     © Horizon
                 </div>
             </div>
+            <div className="bg-gray-100 text-center py-4 mt-6">
+                <h2 className="text-xl font-bold mb-4">Sponsored by</h2>
+                <p className="text-lg mb-4">Horizonは以下の企業よりサポートを受けています。</p>
+
+                <div className="mb-6">
+                    <h3 className="text-lg font-semibold mb-2">ツールスポンサー: 【Qiita株式会社様】</h3>
+                    <div className="flex justify-center space-x-6">
+                        <a href="https://qiita.com/" target="_blank" className="text-lg font-semibold hover:underline">
+                            ▶ Qiita
+                        </a>
+                        <a href="https://teams.qiita.com/" target="_blank" className="text-lg font-semibold hover:underline">
+                            ▶ Qiita Team
+                        </a>
+                    </div>
+                </div>
+            </div>
         </section>
     );
 }
