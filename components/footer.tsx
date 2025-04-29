@@ -6,6 +6,8 @@ import { rawNewsList, rawNewsCategoryList, News, NewsCategory } from '../types/n
 
 import { filteringNewsByCategory } from '../features/filteringNewsByCategory'
 
+import parse from 'html-react-parser';
+
 export default function Footer({ news_list, news_category }: {
     news_list: rawNewsList;
     news_category: rawNewsCategoryList;
@@ -105,7 +107,9 @@ export default function Footer({ news_list, news_category }: {
                         <div className='relative max-md:h-[15vh] bg-gray-100 m-5  md:w-[30vw] text-xl md:p-5 font-murecho overflow-hidden'>
                             <div className='w-full h-full overflow-y-auto'>
                                 {selectedNews?.main_content ?
-                                    <div className='max-md:text-sm p-2'>{selectedNews?.main_content}</div>
+                                    <div className='max-md:text-sm p-2'>
+                                    {selectedNews?.main_content ? parse(selectedNews.main_content) : null}
+                                    </div>
                                     :
                                     <div className='text-gray-400 font-kanit text-center py-9'>CONTENT</div>}
                             </div>
